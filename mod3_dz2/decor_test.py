@@ -24,7 +24,8 @@ def divine(a,b):
 def get_element(lst, idx):
     return lst[idx]
 
-
+#У меня как то не правильно "принт" выводит сообщение ошибки.
+#Не могу понять чего так
 print(f"Тест ---Divine--- №1\n{divine(5,2)}\n"
       f"Тест ---Divine--- №2\n{divine('5',10)}\n"
       f"Тест ---Divine--- №3\n{divine(5,0)}\n\n")
