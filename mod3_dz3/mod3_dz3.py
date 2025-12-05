@@ -10,7 +10,7 @@ def decor_time(func): # Декоратор для замера потрачен�
         result = func(*args,**kwargs)
         end_time = time.time()
         res_time = end_time - start_time
-        print(f'Время выполнения {func.__name__}: {res_time:.5f} секунд')
+        print(f'Время выполнения {func.__name__}: {res_time:.10f} секунд')
         return result
     return wrapper
 
