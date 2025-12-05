@@ -1,6 +1,9 @@
+import asyncio
 import threading
 import queue
 import time
+
+
 def decor_time(func): # Декоратор для замера потраченого времени на работу функции
     def wrapper(*args,**kwargs):
         start_time = time.time()
@@ -65,6 +68,17 @@ def find_primes_multi_thread(start, end, name_two = None): #Задание 3. П
         print(f'{name_two}->\n{result}')
 
 find_primes_multi_thread(1,100)
+
+@decor_time
+async def async_func(start, end):
+    name = 'Асинхронный режим'
+    result = []
+    for number in range(start, end+1):
+        if is_prime(number):
+            result.append(number)
+    print(f'{name} ->\n{result}')
+asyncio.run(async_func(1,100))
+
 
 
 # В итоге, оба варианта (один поток и два потока) выдают одинаковый результат - список простых чисел от 1 до 100.
