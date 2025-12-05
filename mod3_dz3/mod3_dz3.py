@@ -1,4 +1,3 @@
-import functools
 import threading
 import queue
 import time
