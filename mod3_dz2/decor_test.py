@@ -1,3 +1,4 @@
+
 def check_division_error(func):
     def wrapper(*args,**kwargs):
         try:

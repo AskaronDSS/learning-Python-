@@ -10,7 +10,7 @@ def decor_time(func): # Декоратор для замера потрачен�
         result = func(*args,**kwargs)
         end_time = time.time()
         res_time = end_time - start_time
-        print(f'Время выполнения {func.__name__}: {res_time:.10f} секунд')
+        print(f'Время выполнения {result[1]}: {res_time:.10f} секунд')
         return result
     return wrapper
 
@@ -41,22 +41,22 @@ def find_primes_single_tread(start, end, q=None, name = 'Один поток'): 
         print(f'{name} ->\n{result}')
         if q is not None:
             q.put(result)
-    return result
+    return result, name
 # Запуск одного потока. От 1 до 100
 thread = threading.Thread(target=find_primes_single_tread, args=(1,100))
 thread.start()
 
 @decor_time
-def find_primes_multi_thread(start, end, name_two = None): #Задание 3. Поиск простых чисел в диапазоне start-end с использованием двух потоков
+def find_primes_multi_thread(start, end, threads_name, name_two = None): #Задание 3. Поиск простых чисел в диапазоне start-end с использованием двух потоков
     result = []
     lock = threading.Lock()
-    name_two = 'Два потока'
+    # name_two = 'Два потока'
     q = queue.Queue()
     end_one = (start + end) // 2 # находим середину диапазона
     # создаем два потока для поиска простых чисел
     
-    one_stream = threading.Thread(target=find_primes_single_tread, args=(start, int(end_one), q, 'Первый поток'))
-    two_stream = threading.Thread(target=find_primes_single_tread, args=(int(end_one), end, q, 'Второй поток'))
+    one_stream = threading.Thread(target=find_primes_single_tread, args=(start, int(end_one), q, threads_name[0]))
+    two_stream = threading.Thread(target=find_primes_single_tread, args=(int(end_one), end, q, threads_name[1]))
     one_stream.start() 
     two_stream.start() 
     one_stream.join() 
@@ -66,17 +66,18 @@ def find_primes_multi_thread(start, end, name_two = None): #Задание 3. П
             result.extend(q.get()) 
 
         print(f'{name_two}->\n{result}')
+    return result, name_two
 
-find_primes_multi_thread(1,100)
+find_primes_multi_thread(1,100, ['Поток 1', 'Поток 2'])
 
 @decor_time
-async def async_func(start, end):
-    name = 'Асинхронный режим'
+async def async_func(start, end, name = 'Асинхронный режим'): # Задание 4. Поиск простых чисел в диапазоне start-end с использованием асинхронности
     result = []
     for number in range(start, end+1):
         if is_prime(number):
             result.append(number)
     print(f'{name} ->\n{result}')
+    return result, name
 asyncio.run(async_func(1,100))
 
 
