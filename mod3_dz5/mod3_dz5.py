@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+import unittest
+>>>>>>> ded9c92b04bf18ddd0f8c17df12d20f586be1e27
 from sqlalchemy import Column, Integer, String, create_engine, select
 from sqlalchemy.orm import declarative_base, sessionmaker
 
@@ -60,6 +64,7 @@ class User:
 #     return a
 
 
+<<<<<<< HEAD
 while True:
     select_user = input('Select:\n1 - register\n2 - login\n3 - exit\n')
     if select_user == '1':
@@ -87,3 +92,42 @@ while True:
 #     person.register()
 #     assert person.login('test_name', 'test_pass') == '-----Welcome-----'
 #
+=======
+# while True:
+#     try:
+#         select_user = input(f'Select options:\n1 -> Register\n2 -> Login\n3 -> Exit\n')
+#         if select_user == '1':
+#             username = input('Enter username: ')
+#             password = input('Enter password: ')
+#             email = input('Enter email: ')
+#             user = User(username, password, email)
+#             user.register()
+#             print('I remembered you!')
+#     except:
+#         raise TypeError('Select 1, 2 or 3')
+#     if select_user == '2':
+#         username = input('Enter username: ')
+#         password = input('Enter password: ')
+#         user = User(username, password, None)
+#         print(user.login(username, password))
+#     if select_user == '3':
+#         break
+
+class MyUnitTest(unittest.TestCase):
+    
+    def test_register_and_login(self):
+        #Создаем нового пользователя и регистрируем его
+        user = User('test_user', 'test_pass', 'test_email')
+        user.register()
+        #Тест на правильный логин и пароль
+        login_result = user.login('test_user', 'test_pass')
+        self.assertEqual(login_result, 'Welcome')
+        #Тест на неправильный логин и пароль
+        login_result_fail = user.login('test_user', 'wrong_pass')
+        self.assertEqual(login_result_fail, 'You not pass!!!')
+   
+
+if __name__ == '__main__':
+    unittest.main()
+    
+>>>>>>> ded9c92b04bf18ddd0f8c17df12d20f586be1e27
