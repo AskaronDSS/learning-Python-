@@ -10,7 +10,6 @@ def get_connection():
         database="db_mod3"
     )
 
-# ---------- КЛАСС USER ----------
 class User:
     def __init__(self, username=None, password=None, email=None):
         self.username = username
@@ -62,7 +61,6 @@ class User:
             return None
 
 
-# ---------- КЛАСС SITE ----------
 class Site:
     def __init__(self, user_id):
         self.user_id = user_id
@@ -120,7 +118,6 @@ class Site:
 """)
 
 
-# ---------- ГОЛОВНЕ МЕНЮ ----------
 def main():
     while True:
         print("""
@@ -151,7 +148,7 @@ def main():
                     print("""
                     1 - Добавить сайт
                     2 - Показать сайты
-                    3 - Вийти с аккаунта
+                    3 - Выйти с аккаунта
                     """)
                     sub = input("Что надо? : ")
 
