@@ -65,17 +65,15 @@ df['Credit_History'] = df['Credit_History'].fillna(0)
 
 
 
-# 3. Определяем признаки (X) и цель (y)
-# ЗАМЕНИТЕ 'Loan_Status' на имя вашей целевой колонки!
 target_col = 'Loan_Status' 
 X = df.drop(target_col, axis=1)
 y = df[target_col]
 
-# 4. Обучаем модель для оценки важности
+
 model = RandomForestClassifier(n_estimators=100, random_state=42)
 model.fit(X, y)
 
-# 5. Визуализация
+
 features = pd.DataFrame({
     'Feature': X.columns,
     'Importance': model.feature_importances_
